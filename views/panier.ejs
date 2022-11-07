@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Shopping Cart</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" ">
+	<link href="https://fonts.googleapis.com/css?family=Montserrat " rel="stylesheet ">
+	<link rel="stylesheet " href="/assets_cart/css/style.css ">
+</head>
+<body>
+	<nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-ligh " style="position: fixed;width:100%;z-index: 1000; " id="ftco-navbar ">
+		<div class="container ">
+			<a class="navbar-brand " href="index.html ">PARA<span>PHARMACIE</span></a>
+		
+			<button class="navbar-toggler " type="button " data-toggle="collapse " data-target="#ftco-nav " aria-controls="ftco-nav " aria-expanded="false " aria-label="Toggle navigation ">
+					<span class="oi oi-menu "></span> Menu
+				  </button>
+		
+			<div class="collapse navbar-collapse " id="ftco-nav ">
+				<ul class="navbar-nav ml-auto ">
+					<li class="nav-item active "><a href="/ " class="nav-link ">Accueil</a></li>
+		
+					<li class="nav-item "><a href="/Produits " class="nav-link ">Produits</a></li>
+					<li class="nav-item "><a href="/Catalogue " class="nav-link ">Catalogue</a></li>
+		
+					<li class="nav-item "><a href="contact.html " class="nav-link ">Contact</a></li>
+					<li class="nav-item ">
+						<% if (role && role=='client') {
+							 %>
+							<a href="/deconnexion " class="nav-link ">
+								 Panier
+							</a>
+							<% }  %>
+		
+		
+		
+					</li>
+					<li class="nav-item ">
+						<% if (role) { %>
+							<a href="/deconnexion " class="nav-link ">
+								 Déconnexion
+							</a>
+							<% } else { %>
+								<a href="# " class="nav-link " data-toggle="modal " data-target="#connexion "><span>Connexion</span></a>
+		
+								<% } %>
+					</li>
+		
+					<li class="nav-item ">
+						<% if (!role) { %>
+							<a href="# " class="nav-link " data-toggle="modal " data-target="#Inscription "><span>Inscription</span></a>
+							<% } %>
+		
+					</li>
+		
+				</ul>
+			</div>
+		</div>
+    </nav>
+	<main class="page ">
+	 	<section class="shopping-cart dark ">
+	 		<div class="container " style="padding-top: 20px; ">
+		        <div class="block-heading ">
+		          <h2>Panier</h2>
+		        </div>
+		        <div class="content ">
+	 				<div class="row ">
+	 					<div class="col-md-12 col-lg-8 ">
+	 						<div class="items ">
+
+								<% 
+								let somme=0;
+								panier.forEach((p, index) => { 
+									let prixtot=p.quantite * p.prix;
+									somme=somme+prixtot;
+									%>
+				 				<div class="product ">
+				 					<div class="row ">
+					 					<div class="col-md-3 ">
+					 						<img class="img-fluid mx-auto d-block image " src="/imagesProduits/<%=p.image%>">
+    </div>
+    <div class="col-md-8 ">
+        <div class="info ">
+            <div class="row ">
+                <div class="col-md-5 product-name ">
+                    <div class="product-name ">
+                        <a href="# ">
+                            <%=p.Nom_produit%>
+                        </a>
+                        <div class="product-info ">
+                            <div>Prix Unitaire: <span class="value "><%=p.prix%><sup><b>dt</b></sup></span></div>
+                            <div>Type: <span class="value "><%=p.type%></span></div>
+                            <div>Description: <span class="value "><%=p.Description%></span></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 quantity ">
+                    <label for="quantity ">Quantité:</label>
+                    <b class="form-control quantity-input "><%=p.quantite%></b>
+                </div>
+                <div class="col-md-3 price ">
+                    <span><%=p.quantite * p.prix %><sup><b>dt</b></sup></span>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+    </div>
+    <% });%>
+        </div>
+        </div>
+        <div class="col-md-12 col-lg-4 ">
+            <div class="summary ">
+                <h3>Résumé</h3>
+                <div class="summary-item "><span class="text ">Sous-total</span><span class="price "><%=somme.toFixed(2)%></span></div>
+                <div class="summary-item "><span class="text ">Remise</span><span class="price ">5%</span></div>
+
+                <div class="summary-item "><span class="text ">Total</span><span class="price "><%=(somme -(somme * 0.05)).toFixed(2)%></span></div>
+                <button type="button " class="btn btn-primary btn-lg btn-block ">Vérifier</button>
+            </div>
+        </div>
+        </div>
+        </div>
+        </div>
+        </section>
+        </main>
+        </body>
+        <script src="https://code.jquery.com/jquery-3.2.1.min.js "></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js "></script>
+        </body>
+
+</html>
